@@ -10,8 +10,8 @@ Goal: a one-page PDF that scores 95%+ on ATS checkers (Naukri Resume Analyser, J
 ## Inputs
 
 - **Master resume**: `resume_calibri.tex` in the workspace root. Never edit it directly; copy it.
-- **Ground truth**: [facts.md](facts.md) — everything that may be claimed. Nothing outside it goes on the resume.
-- **ATS rules**: [ats-rules.md](ats-rules.md) — formatting and wording rules learned from real analyser runs. Read before writing.
+- **Ground truth**: [facts.md](facts.md) – everything that may be claimed. Nothing outside it goes on the resume.
+- **ATS rules**: [ats-rules.md](ats-rules.md) – formatting and wording rules learned from real analyser runs. Read before writing.
 - **JD**: pasted text, attached file, or URL. If only a URL is given, fetch it; if fetching fails, ask the user to paste the text.
 
 ## Workflow
@@ -32,7 +32,7 @@ Copy this checklist and track it:
 
 ### Step 1–2: JD keywords
 
-`scripts/jd_keywords.py` prints JD keywords grouped as **required / preferred / soft**, with frequency, plus the JD's exact job title and seniority. Use the JD's own spelling for every term (e.g. "ReactJS" vs "React.js", "Spring Boot" vs "SpringBoot") — ATS matching is often literal.
+`scripts/jd_keywords.py` prints JD keywords grouped as **required / preferred / soft**, with frequency, plus the JD's exact job title and seniority. Use the JD's own spelling for every term (e.g. "ReactJS" vs "React.js", "Spring Boot" vs "SpringBoot") – ATS matching is often literal.
 
 ### Step 3: Map to facts
 
@@ -40,9 +40,9 @@ For each JD keyword decide:
 
 | Bucket | Rule |
 |--------|------|
-| **Have** | Appears in facts.md — must appear on the resume, ideally in Skills **and** in a bullet. |
-| **Can reframe** | Facts cover it under another name (e.g. JD says "event streaming", facts say Kafka) — use the JD's term alongside the fact's term. |
-| **Do not have** | Not in facts.md — do **not** add. List it in the final report as a gap. |
+| **Have** | Appears in facts.md → must appear on the resume, ideally in Skills *and* in a bullet. |
+| **Can reframe** | Facts cover it under another name (e.g. JD says "event streaming", facts say Kafka) → use the JD's term alongside the fact's term. |
+| **Do not have** | Not in facts.md → do **not** add. List it in the final report as a gap. |
 
 Never add a technology, metric, employer, title, or date that is not in facts.md. If the user says "just add X", add it only after they confirm they have actually used X, then append it to facts.md as well.
 
@@ -50,12 +50,12 @@ Never add a technology, metric, employer, title, or date that is not in facts.md
 
 Edit only content; keep the preamble, fonts, margins, and section order from the master unless a rule in ats-rules.md says otherwise.
 
-1. **Header title line** — mirror the JD title: `<JD title> | <4–6 top JD keywords>`. If the JD title is "Java Full Stack Developer", the line starts with that, not "Senior Software Engineer".
-2. **Summary** (4–5 lines) — first sentence contains the JD title and years of experience; include the top 6–8 JD keywords naturally; end with certifications relevant to the JD.
-3. **Skills** — section heading must be exactly `Skills`. Reorder categories so JD-critical ones come first; put JD keywords first within each line; remove skills the JD does not care about if space is needed.
-4. **Work Experience bullets** — reorder so bullets matching the JD come first; swap in JD terminology; keep every metric. Each bullet starts with a strong action verb (see ats-rules.md list). Max 9 bullets for the current role, 1 for the internship.
-5. **Projects** — lead with the project most relevant to the JD. If the JD is pure backend, the AI Document Management System still stays (GenAI is a differentiator) but its bullets emphasise microservices/Kafka over React. Drop the Airbnb project if space is needed.
-6. **Education / Certifications** — unchanged, except drop a certification only if the JD makes it irrelevant and space is critical.
+1. **Header title line** – mirror the JD title: `<JD title> | <4–6 top JD keywords>`. If the JD title is "Java Full Stack Developer", the line starts with that, not "Senior Software Engineer".
+2. **Summary** (4–5 lines) – first sentence contains the JD title and years of experience; include the top 6–8 JD keywords naturally; end with certifications relevant to the JD.
+3. **Skills** – section heading must be exactly `Skills`. Reorder categories so JD-critical ones come first; put JD keywords first within each line; remove skills the JD does not care about if space is needed.
+4. **Work Experience bullets** – reorder so bullets matching the JD come first; swap in JD terminology; keep every metric. Each bullet starts with a strong action verb (see ats-rules.md list). Max 9 bullets for the current role, 1 for the internship.
+5. **Projects** – lead with the project most relevant to the JD. If the JD is pure backend, the AI Document Management System still stays (GenAI is a differentiator) but its bullets emphasise microservices/Kafka over React. Drop the Airbnb project if space is needed.
+6. **Education / Certifications** – unchanged, except drop a certification only if the JD makes it irrelevant and space is critical.
 
 ### Step 5–7: Compile and validate
 
@@ -73,7 +73,7 @@ python3 scripts/validate_resume.py resume_<Company>_<Role>.pdf --jd jd/<company>
 - every bullet starts with an approved action verb; no personal pronouns
 - bold ratio 8–14 % of words
 - no word repeated > 4 times (excluding stop words and the candidate's core stack)
-- **JD keyword coverage** — prints matched / missing; target ≥ 90 % of *required* and ≥ 75 % overall
+- **JD keyword coverage** – prints matched / missing; target ≥ 90 % of *required* and ≥ 75 % overall
 
 Iterate until the script prints `RESULT: PASS`. Do not hand over a resume with a FAIL.
 
@@ -94,5 +94,5 @@ Tell the user, in this order:
 
 - One page. If content overflows, cut in this order: Airbnb project → least-relevant experience bullet → skill tokens the JD does not mention → shorten summary. Never shrink font below 10 pt or margins below 0.35 in.
 - Truthful: facts.md is the only source. Phone, email, dates, employer, client, metrics stay exactly as in facts.md.
-- Keep `\usepackage[sfdefault,lining]{carlito}`, `\RaggedRight`, `\hyphenpenalty=10000`, and the `\ifpdftex` guard — they fix real ATS extraction bugs (see ats-rules.md).
+- Keep `\usepackage[sfdefault,lining]{carlito}`, `\RaggedRight`, `\hyphenpenalty=10000`, and the `\ifpdftex` guard – they fix real ATS extraction bugs (see ats-rules.md).
 - Section headings exactly: `Summary`, `Skills`, `Work Experience`, `Projects`, `Education`, `Certifications`.
