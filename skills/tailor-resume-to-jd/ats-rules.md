@@ -6,7 +6,7 @@ Distilled from two Naukri Resume Analyser runs on `resume_calibri.pdf` (score mo
 
 | Rule | Why |
 |------|-----|
-| `\usepackage[sfdefault,lining]{carlito}` | **(observed)** Default old-style numerals in Carlito have a broken Unicode map – phone, dates and every '%' extracted as 'ụŴŵ…'. `lining` fixes it. |
+| `\usepackage[sfdefault,lining]{carlito}` | **(observed)** Default old-style numerals in Carlito have a broken Unicode map – phone, dates and every `%` extracted as 'ųŴŵ…'. `lining` fixes it. |
 | `\RaggedRight` (ragged2e) | **(observed)** Justified text squeezed spaces and the parser read `themwith`, `andMySQL`. Ragged-right never shrinks spaces. |
 | `\hyphenpenalty=10000 \exhyphenpenalty=10000` | Hyphenated line breaks split keywords (`micro-\nservices`). |
 | `\ifpdftex \input{glyphtounicode} \pdfgentounicode=1 \fi` | Correct ToUnicode under pdfLaTeX; the guard lets the same file compile under XeTeX/Tectonic. |
@@ -29,7 +29,7 @@ Distilled from two Naukri Resume Analyser runs on `resume_calibri.pdf` (score mo
 | Metrics in every bullet where truthful; keep the exact figures from facts.md | Recruiter scanning; analyser's own examples are metric-led. |
 | Use the JD's spelling for each keyword (React.js vs ReactJS, Spring Boot vs SpringBoot, CI/CD vs CICD) | Many ATS do literal matching. Include both forms only if space allows (e.g. "REST APIs (RESTful)"). |
 | Spell out acronyms once when the JD uses the long form (e.g. "Retrieval-Augmented Generation (RAG)") | Covers both match variants. |
-| Dates as `Mon YYYY –– Mon YYYY` with en-dash, "Present" for current | Parsers compute experience from these. |
+| Dates as `Mon YYYY -- Mon YYYY` with en-dash, "Present" for current | Parsers compute experience from these. |
 | Contact line: City, Country | email | phone | linkedin | github – plain text, no icons | Icons become garbage glyphs. |
 
 ## Keyword placement priority
