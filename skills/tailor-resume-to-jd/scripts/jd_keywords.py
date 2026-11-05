@@ -25,10 +25,10 @@ TECH = {
     "Hibernate": [r"\bhibernate\b"], "Microservices": [r"\bmicro\s*-?\s*services?\b"],
     "REST APIs": [r"\brest(ful)?\b", r"\brest\s*apis?\b"], "GraphQL": [r"\bgraphql\b"], "gRPC": [r"\bgrpc\b"],
     "SQL": [r"\bsql\b(?!\s*server)"], "MySQL": [r"\bmysql\b"], "PostgreSQL": [r"\bpostgres(ql)?\b"], "Oracle": [r"\boracle\b"],
-    "SQL Server": [r"\bsql\s*server\b)"], "MongoDB": [r"\bmongo(db)?\b"], "Cassandra": [r"\bcassandra\b"], "DynamoDB": [r"\bdynamodb\b"],
+    "SQL Server": [r"\bsql\s*server\b"], "MongoDB": [r"\bmongo(db)?\b"], "Cassandra": [r"\bcassandra\b"], "DynamoDB": [r"\bdynamodb\b"],
     "NoSQL": [r"\bnosql\b"], "Redis": [r"\bredis\b"], "Elasticsearch": [r"\belastic\s*search\b"],
     "Apache Kafka": [r"\bkafka\b"], "RabbitMQ": [r"\brabbitmq\b"], "Event-Driven Architecture": [r"\bevent[\s-]*driven\b", r"\bevent\s*streaming\b"],
-    "AWS": [r"\baws\b", r"\bamazon\s*web\s*services\b"], "AZURE": [r"\bazure\b"], "GCP": [r"\bgcp\b", r"\bgoogle\s*cloud\b"],
+    "AWS": [r"\baws\b", r"\bamazon\s*web\s*services\b"], "Azure": [r"\bazure\b"], "GCP": [r"\bgcp\b", r"\bgoogle\s*cloud\b"],
     "Docker": [r"\bdocker\b"], "Kubernetes": [r"\bkubernetes\b", r"\bk8s\b"], "Jenkins": [r"\bjenkins\b"],
     "CI/CD": [r"\bci\s*/?\s*cd\b", r"\bcontinuous\s*(integration|delivery|deployment)\b"], "Git": [r"\bgit\b(?!hub|lab)"],
     "GitHub": [r"\bgithub\b"], "Maven": [r"\bmaven\b"], "Gradle": [r"\bgradle\b"], "Terraform": [r"\bterraform\b"],
@@ -45,7 +45,7 @@ TECH = {
     "Data Structures and Algorithms": [r"\bdata\s*structures?\b", r"\balgorithms?\b", r"\bdsa\b"], "OOP": [r"\boops?\b", r"\bobject[\s-]*oriented\b"],
     "SOLID": [r"\bsolid\b"], "Agile/Scrum": [r"\bagile\b", r"\bscrum\b"], "Code Review": [r"\bcode\s*reviews?\b"],
     "Performance Tuning": [r"\bperformance\s*(tuning|optimi[sz]ation)\b"], "Scalability": [r"\bscalab(le|ility)\b"], "High Availability": [r"\bhigh\s*availability\b"],
-    "Production Support": [r"\bproduction\s*support\b", r"\bon[\s-]*call\b", r"\bincident\b"], "Monitoring": [r"\bmonitoring\b", r"\bobservability\b", r"\bgrafana\b", r"\bprometheus\b", r"\bsplunk\b", r"\bdatadog\b"],
+    "Production Support": [r"\bproduction\s*support\b", r"\bon[\s-]*call\b", r"\bincident"], "Monitoring": [r"\bmonitoring\b", r"\bobservability\b", r"\bgrafana\b", r"\bprometheus\b", r"\bsplunk\b", r"\bdatadog\b"],
     "Linux": [r"\blinux\b", r"\bunix\b"], "Shell Scripting": [r"\bshell\s*script"], "Python": [r"\bpython\b"],
     "SaaS": [r"\bsaas\b"], "Fintech": [r"\bfintech\b", r"\bpayments?\b", r"\bbanking\b", r"\baccounting\b"],
     "Mentoring": [r"\bmentor(ing|ship)?\b"], "Leadership": [r"\bleadership\b", r"\blead(ing)?\s+(a\s+)?team\b"],
@@ -120,7 +120,7 @@ def main():
     if as_json:
         print(json.dumps(result, indent=2)); return
 
-    print(f"JD title    : {title or '(not detected - read the JD)'}")
+    print(f"JD title : {title or '(not detected – read the JD)'}")
     print(f"Years asked : {years or '(none)'}")
     for grp in ("required", "preferred", "other", "soft"):
         items = result[grp]

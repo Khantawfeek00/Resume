@@ -6,7 +6,7 @@ Distilled from two Naukri Resume Analyser runs on `resume_calibri.pdf` (score mo
 
 | Rule | Why |
 |------|-----|
-| `\usepackage[sfdefault,lining]{carlito}` | **(observed)** Default old-style numerals in Carlito have a broken Unicode map – phone, dates and every `%` extracted as 'ųŴŵ…'. `lining` fixes it. |
+| `\usepackage[sfdefault,lining]{carlito}` | **(observed)** Default old-style numerals in Carlito have a broken Unicode map – phone, dates and every `%` extracted as `ųŴŵ…`. `lining` fixes it. |
 | `\RaggedRight` (ragged2e) | **(observed)** Justified text squeezed spaces and the parser read `themwith`, `andMySQL`. Ragged-right never shrinks spaces. |
 | `\hyphenpenalty=10000 \exhyphenpenalty=10000` | Hyphenated line breaks split keywords (`micro-\nservices`). |
 | `\ifpdftex \input{glyphtounicode} \pdfgentounicode=1 \fi` | Correct ToUnicode under pdfLaTeX; the guard lets the same file compile under XeTeX/Tectonic. |
