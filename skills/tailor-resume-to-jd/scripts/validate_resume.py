@@ -4,7 +4,7 @@
 Usage:
     python3 validate_resume.py resume.pdf
     python3 validate_resume.py resume.pdf --jd jd/company-role.txt
-    python3 validate_resume.py resume.pdf --png /tmp/p1.png    # also render page 1
+    python3 validate_resume.py resume.pdf --png /tmp/p1.png      # also render page 1
 
 Requires: pip install pymupdf
 Exit code 0 on PASS, 1 on FAIL. WARNs do not fail but should be reviewed.
@@ -32,10 +32,9 @@ ACTION_VERBS = {
     "streamlined", "spearheaded", "created", "deployed", "orchestrated", "drove", "shipped", "scaled", "refactored",
     "introduced", "modernized", "accelerated", "enabled", "transformed", "cut", "increased", "boosted", "pioneered",
 }
-
 PRONOUNS = {"i", "me", "my", "we", "our", "us", "them", "their", "they"}
 STOP = set("""a an the and or of to in on for with by via from across at as into over under per is are was were be been
-using used while within through end-to-end to that this those its it their them so all any each every both
+using used while within through end-to-end end to that this these those its it their them so all any each every both
 plus not no than more most less least out up down off""".split())
 # Technology terms may legitimately repeat (ATS rewards it); only non-tech words are checked for repetition.
 CORE_STACK_OK = {"java", "spring", "boot", "apis", "api", "rest", "react.js", "react", "aws", "services", "service", "production",
@@ -115,7 +114,7 @@ def main():
     check(0.08 <= ratio <= 0.15, f"bold ratio = {ratio:.0%} (target 8-15%)", warn=True)
 
     # fonts embedded
-    fonts = [f[3] for f in page.get_fonts()]
+    fonts = {f[3] for f in page.get_fonts()}
     check(all("+" in f for f in fonts), f"fonts embedded/subsetted: {sorted(fonts)}")
 
     # contact
@@ -129,7 +128,6 @@ def main():
                              capture_output=True, text=True)
         import json
         kw = json.loads(out.stdout)
-
         low = text.lower()
 
         norm = re.sub(r"[-\u2013\u2014]", " ", low)          # hyphens -> spaces ("unit-test" -> "unit test")
@@ -145,7 +143,7 @@ def main():
             cands |= {re.sub(r"[-\u2013]", " ", c) for c in cands}
             cands |= {c[:-3] for c in cands if c.endswith("ing")}   # "unit testing" -> "unit test"
             cands |= {c.rstrip("s") for c in cands}
-            return any(c in norm_nospace or c.replace(" ", "") in norm_nospace for c in cands if len(c) > 2)
+            return any(c in norm or c.replace(" ", "") in norm_nospace for c in cands if len(c) > 2)
 
         req = kw["required"]; pref = kw["preferred"]; other = kw["other"]
         req_hit = [i["keyword"] for i in req if present(i)]
@@ -155,8 +153,8 @@ def main():
         all_miss = [i["keyword"] for i in all_items if not present(i)]
         r_cov = len(req_hit) / max(len(req), 1)
         a_cov = len(all_hit) / max(len(all_items), 1)
-        check(r_cov >= 0.90, f"REQUIRED keyword coverage {r_cov:.0%} ({len(req_hit)}/{len(req)}) | missing: {req_miss}")
-        check(a_cov >= 0.75, f"overall keyword coverage {a_cov:.0%} ({len(all_hit)}/{len(all_items)}) | missing: {all_miss}", warn=True)
+        check(r_cov >= 0.90, f"REQUIRED keyword coverage {r_cov:.0%} ({len(req_hit)}/{len(req)}) - missing: {req_miss}")
+        check(a_cov >= 0.75, f"overall keyword coverage {a_cov:.0%} ({len(all_hit)}/{len(all_items)}) - missing: {all_miss}", warn=True)
         title = kw.get("title", "")
         if title:
             check(title.lower() in low, f"JD title '{title}' appears in resume", warn=True)
@@ -167,11 +165,11 @@ def main():
         oks.append(f"rendered page 1 -> {png}")
 
     for m in oks:
-        print("OK  ", m)
+        print("OK ", m)
     for m in warns:
-        print("WARN", m)
+        print("WARN ", m)
     for m in fails:
-        print("FAIL", m)
+        print("FAIL ", m)
     status = "PASS" if not fails else "FAIL"
     print(f"\nRESULT: {status} | pages={len(doc)} words={wc} bold={ratio:.0%}{coverage_line}")
     sys.exit(0 if not fails else 1)

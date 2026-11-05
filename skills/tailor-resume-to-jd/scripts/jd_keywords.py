@@ -61,8 +61,8 @@ REQUIRED_HINTS = re.compile(r"(must[\s-]*have|required|requirements?|mandatory|e
 PREFERRED_HINTS = re.compile(r"(nice[\s-]*to[\s-]*have|preferred|plus|bonus|good\s+to\s+have|desirable|advantage)", re.I)
 
 TITLE_RE = re.compile(r"(?im)^(?:job\s*title|role|position|designation)\s*[:\-]\s*(.+)$")
-TITLE_FALLBACK = re.compile(r"(?i)(senior|jr\.?|lead|principal|staff|junior)?\s*(java\s*)?(full[\s-]stack|backend|back-end|software|application)\s*(developer|engineer|sde[\s-]*\w+)\b")
-YEARS_RE = re.compile(r"(\d+)\+?\s*(?:to\s*\d+\+?)?\s*years?\s*(?:of\s*(?:experience)?)?\b", re.I)
+TITLE_FALLBACK = re.compile(r"(?i)\b((senior|sr\.?|lead|principal|staff|junior)?\s*(java\s+)?(full[\s-]*stack|backend|back-end|software|application)\s*(developer|engineer|sde[\s-]*\w*)\s*(ii|iii|2|3)?)\b")
+YEARS_RE = re.compile(r"(\d+)\s*(?:\+\-\s*\d+)?\s*(?:\+\s*)?years?", re.I)
 
 
 def find_matches(text, table):
@@ -120,12 +120,12 @@ def main():
     if as_json:
         print(json.dumps(result, indent=2)); return
 
-    print(f"JD title    : {title or '(not detected \u2014 read the JD)'}")
+    print(f"JD title    : {title or '(not detected - read the JD)'}")
     print(f"Years asked : {years or '(none)'}")
     for grp in ("required", "preferred", "other", "soft"):
         items = result[grp]
         print(f"\n{grp.upper()} ({len(items)})")
-        for it in sorted(items, key=lambda x: -x["count"]):
+        for it in sorted(items, key=lambda x: -x['count']):
             print(f"  {it['keyword']:<32} x{it['count']:<2}  JD spelling: {it['jd_spelling']}")
     print("\nNext: map each REQUIRED/PREFERRED keyword to facts.md (have / reframe / gap).")
 
