@@ -71,7 +71,7 @@ def main():
     check(480 <= wc <= 680, f"words = {wc} (target 480-680)", warn=True)
 
     # text extraction sanity
-    bad_glyphs = sorted({c for c in text if ord(c) > 0x2FF and c not in "+\u2014"})
+    bad_glyphs = sorted({c for c in text if ord(c) > 0x2FF and c not in "•—"})
     check(not bad_glyphs, f"non-Latin glyphs in extraction: {bad_glyphs} (digits/fonts broken for ATS)")
     digits_ok = re.search(r"\b20\d\d\b", text) and re.search(r"\d+%", text)
     check(bool(digits_ok), "years and percentages extract as real digits")
@@ -87,7 +87,7 @@ def main():
     check(not missing, f"section headings present (missing: {missing})")
 
     # bullets: action verbs & pronouns
-    bullets = [l.strip() for l in text.splitlines() if l.strip().startswith("\u2022")]
+    bullets = [l.strip() for l in text.splitlines() if l.strip().startswith("•")]
     weak = [b.split()[1] for b in bullets if len(b.split()) > 1 and b.split()[1].lower().strip(",.") not in ACTION_VERBS]
     check(not weak, f"all {len(bullets)} bullets start with an approved action verb (weak: {weak})")
     pron = sorted({w.lower() for w in re.findall(r"\b[A-Za-z]+\b", text) if w.lower() in PRONOUNS})
@@ -130,7 +130,7 @@ def main():
         kw = json.loads(out.stdout)
         low = text.lower()
 
-        norm = re.sub(r"[-\u2013\u2014]", " ", low)          # hyphens -> spaces ("unit-test" -> "unit test")
+        norm = re.sub(r"[-\u2013\u2014]", " ", low)           # hyphens -> spaces ("unit-test" -> "unit test")
         norm_nospace = norm.replace(" ", "")
 
         def present(item):
@@ -153,8 +153,8 @@ def main():
         all_miss = [i["keyword"] for i in all_items if not present(i)]
         r_cov = len(req_hit) / max(len(req), 1)
         a_cov = len(all_hit) / max(len(all_items), 1)
-        check(r_cov >= 0.90, f"REQUIRED keyword coverage {r_cov:.0%} ({len(req_hit)}/{len(req)}) - missing: {req_miss}")
-        check(a_cov >= 0.75, f"overall keyword coverage {a_cov:.0%} ({len(all_hit)}/{len(all_items)}) - missing: {all_miss}", warn=True)
+        check(r_cov >= 0.90, f"REQUIRED keyword coverage {r_cov:.0%} ({len(req_hit)}/{len(req)}) — missing: {req_miss}")
+        check(a_cov >= 0.75, f"overall keyword coverage {a_cov:.0%} ({len(all_hit)}/{len(all_items)}) — missing: {all_miss}", warn=True)
         title = kw.get("title", "")
         if title:
             check(title.lower() in low, f"JD title '{title}' appears in resume", warn=True)
@@ -165,7 +165,7 @@ def main():
         oks.append(f"rendered page 1 -> {png}")
 
     for m in oks:
-        print("OK ", m)
+        print("OK  ", m)
     for m in warns:
         print("WARN ", m)
     for m in fails:

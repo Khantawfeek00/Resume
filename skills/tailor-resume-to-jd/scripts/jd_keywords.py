@@ -3,7 +3,7 @@
 
 Usage:
     python3 jd_keywords.py jd/company-role.txt          # human-readable report
-    python3 jd_keywords.py jd/company-role.txt --json   # machine-readable
+    python3 jd_keywords.py jd/company-role.txt --json       # machine-readable
 
 Groups keywords into required / preferred / soft, reports the JD's job title,
 seniority hints, and years-of-experience asks. Matching is case-insensitive and
@@ -38,16 +38,16 @@ TECH = {
     "JUnit": [r"\bjunit\b"], "Mockito": [r"\bmockito\b"], "TDD": [r"\btdd\b", r"\btest[\s-]*driven\b"], "Unit Testing": [r"\bunit\s*test(ing|s)?\b"],
     "Swagger/OpenAPI": [r"\bswagger\b", r"\bopenapi\b"], "Postman": [r"\bpostman\b"],
     "OAuth 2.0": [r"\boauth\s*2?(\.0)?\b"], "JWT": [r"\bjwt\b"], "Keycloak": [r"\bkeycloak\b"], "Spring Security/Auth": [r"\bauthentication\b", r"\bauthorization\b"],
-    "Generative AI": [r"\bgen(erative)?\s*ai\b"], "LLM": [r"\bllms?\b", r"\blarge\s*language\s*model(s)?\b"], "RAG": [r"\brag\b", r"\bretrieval[\s-]*augmented\b"],
+    "Generative AI": [r"\bgen(erative)?\s*ai\b"], "LLM": [r"\bllms?\b", r"\blarge\s*language\s*models?\b"], "RAG": [r"\brag\b", r"\bretrieval[\s-]*augmented\b"],
     "Vector Database": [r"\bvector\s*(db|database|store)s?\b", r"\bpgvector\b", r"\bembeddings?\b"], "Machine Learning": [r"\bmachine\s*learning\b", r"\bml\b"],
     "GitHub Copilot": [r"\bcopilot\b"], "AI Tools": [r"\bai[\s-]*(assisted|powered|coding)\s*(tools?|development)?\b"],
     "System Design": [r"\bsystem\s*design\b"], "Distributed Systems": [r"\bdistributed\s*systems?\b"], "Design Patterns": [r"\bdesign\s*patterns?\b"],
     "Data Structures and Algorithms": [r"\bdata\s*structures?\b", r"\balgorithms?\b", r"\bdsa\b"], "OOP": [r"\boops?\b", r"\bobject[\s-]*oriented\b"],
     "SOLID": [r"\bsolid\b"], "Agile/Scrum": [r"\bagile\b", r"\bscrum\b"], "Code Review": [r"\bcode\s*reviews?\b"],
     "Performance Tuning": [r"\bperformance\s*(tuning|optimi[sz]ation)\b"], "Scalability": [r"\bscalab(le|ility)\b"], "High Availability": [r"\bhigh\s*availability\b"],
-    "Production Support": [r"\bproduction\s*support\b"], "Monitoring": [r"\bmonitor(ing)?\b"], "Observability": [r"\bobservability\b"], "Grafana/Prometheus": [r"\bgrafana\b", r"\bprometheus\b", r"\bsplunk\b", r"\bdatadog\b"],
+    "Production Support": [r"\bproduction\s*support\b", r"\bon[\s-]*call\b", r"\bincident\b"], "Monitoring": [r"\bmonitoring\b", r"\bobservability\b", r"\bgrafana\b", r"\bprometheus\b", r"\bsplunk\b", r"\bdatadog\b"],
     "Linux": [r"\blinux\b", r"\bunix\b"], "Shell Scripting": [r"\bshell\s*script"], "Python": [r"\bpython\b"],
-    "SaaS": [r"\bsaas\b"], "Fintech": [r"\bfintech\b"], "Payments": [r"\bpayments?\b"], "Banking": [r"\bbanking\b", r"\baccounting\b"],
+    "SaaS": [r"\bsaas\b"], "Fintech": [r"\bfintech\b", r"\bpayments?\b", r"\bbanking\b", r"\baccounting\b"],
     "Mentoring": [r"\bmentor(ing|ship)?\b"], "Leadership": [r"\bleadership\b", r"\blead(ing)?\s+(a\s+)?team\b"],
 }
 
