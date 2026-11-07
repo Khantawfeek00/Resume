@@ -1,6 +1,9 @@
 ---
 name: tailor-resume-to-jd
-description: Tailor Tawfeek Khan's LaTeX resume (resume_calibri.tex) to a specific job description and compile an ATS-optimised one-page PDF. Use when the user pastes or attaches a JD, says "tailor/optimise/update my resume for this job/role/company", asks for an ATS-friendly resume, or wants a resume for a specific application. Produces a new tailored .tex + .pdf, validates ATS score (keyword coverage, one page, text extraction, grammar rules) with scripts/validate_resume.py, and never invents experience not listed in facts.md.
+description: >-
+  Tailor Tawfeek Khan's LaTeX resume to a specific job description.
+  Use when the user pastes a JD or says "tailor/optimise my resume for this role".
+  Produces an ATS-optimised one-page PDF, validated with scripts/validate_resume.py.
 ---
 
 # Tailor Resume to JD

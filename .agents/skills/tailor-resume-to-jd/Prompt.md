@@ -6,7 +6,7 @@ Company: <COMPANY NAME>
 Role: <ROLE TITLE AS WRITTEN IN THE JD>
 
 Instructions:
-1. Read .cursor/skills/tailor-resume-to-jd/SKILL.md and follow its workflow end to end.
+1. Read .agents/skills/tailor-resume-to-jd/SKILL.md and follow its workflow end to end.
 2. Save the JD below to jd/<company>-<role>.txt and run scripts/jd_keywords.py on it.
 3. Use resume_calibri.tex as the master. Do NOT edit it. Create resume_<Company>_<Role>.tex and compile it with tectonic.
 4. Use only claims from facts.md. Reframe wording to match the JD's exact spelling of each keyword, but never add a technology, metric, employer, title, or date that is not in facts.md. List anything the JD requires that I don't have as a gap — do not fabricate it.
